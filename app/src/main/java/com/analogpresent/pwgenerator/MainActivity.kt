@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.SeekBar
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -19,23 +20,43 @@ class MainActivity : AppCompatActivity() {
         val charsSmall = "abcdefghijklmnopqrstuvwxyz"
         val charsCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+        var PasswordLength = 8
+
+        seekBar?.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(
+                seek: SeekBar,
+                progress: Int, fromUser: Boolean
+            ) {
+                PasswordLength=seekBar.progress
+                textView3.setText(PasswordLength.toString())
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+        })
+
         button.setOnClickListener {
 
             // check what was checked!
-            var PasswordLetters=""
-            if(chkBox_num.isChecked)
-                PasswordLetters+= numbers;
+            var PasswordLetters = ""
+            if (chkBox_num.isChecked)
+                PasswordLetters += numbers;
 
-            if(chkBox_small.isChecked)
-                PasswordLetters+= charsSmall;
+            if (chkBox_small.isChecked)
+                PasswordLetters += charsSmall;
 
-            if(chkBox_Capital.isChecked)
-                PasswordLetters+= charsCapital;
+            if (chkBox_Capital.isChecked)
+                PasswordLetters += charsCapital;
 
-            if(PasswordLetters.equals(""))
-                Toast.makeText(this@MainActivity, "Please select something! ", Toast.LENGTH_SHORT).show()
+            if (PasswordLetters.equals(""))
+                Toast.makeText(this@MainActivity, "Please select something! ", Toast.LENGTH_SHORT)
+                    .show()
             else {
-                val tempPassword = generatePassword(PasswordLetters)
+                val tempPassword = generatePassword(PasswordLetters,PasswordLength)
                 textView.setText(tempPassword)
 
                 // clipboard
@@ -45,18 +66,18 @@ class MainActivity : AppCompatActivity() {
                     .show()
             }
         }
-
-    }
-
-    private fun generatePassword(passwordLetters: String): String {
-        var tempPassword=""
-//        val alphabet: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9') + ('?')
-//        fun randomID(): String = List(8) { alphabet.random() }.joinToString("")
-
-        for (x in 1 .. 16)
-            tempPassword += passwordLetters.random().toString()
-
-        return tempPassword
     }
 
 }
+
+private fun generatePassword(passwordLetters: String, passwordLength: Int): String {
+    var tempPassword = ""
+//        val alphabet: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9') + ('?')
+//        fun randomID(): String = List(8) { alphabet.random() }.joinToString("")
+
+    for (x in 1..passwordLength)
+        tempPassword += passwordLetters.random().toString()
+
+    return tempPassword
+}
+
