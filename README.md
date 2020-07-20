@@ -1,3 +1,4 @@
+<p align="center"> <img width="750" src="https://raw.githubusercontent.com/Sprachmensch/PWGenerator/master/logo.png"/></p>
 ### Password Generator (Kotlin) - > work in progress!
 
 #### needs improvement:
@@ -5,5 +6,5 @@
  - code
  - better read me :)
 
-<p> <img width="500" src="https://raw.githubusercontent.com/Sprachmensch/PWGenerator/master/pw_screen.png"/></p>
+<p> <img width="350" src="https://raw.githubusercontent.com/Sprachmensch/PWGenerator/master/screen.png"/></p>
 
