@@ -56,13 +56,13 @@ class MainActivity : AppCompatActivity() {
             else {
                 tempPassword = generatePassword(PasswordLetters, PasswordLength)
                 tVPassword.setText(tempPassword)
-                imageButton2.visibility = View.VISIBLE
+                btnClipboard.visibility = View.VISIBLE
 
 
             }
         }
 
-        imageButton2.setOnClickListener {
+        btnClipboard.setOnClickListener {
             var clip = ClipData.newPlainText("...", tempPassword)
             clipboard.setPrimaryClip(clip)
             Toast.makeText(this@MainActivity, "Copied: " + tempPassword, Toast.LENGTH_SHORT)

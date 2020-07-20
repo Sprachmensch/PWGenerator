@@ -17,7 +17,7 @@
         android:textColor="@color/purple_500"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
 
     <Switch
         android:id="@+id/switchNumbers"
@@ -105,7 +105,7 @@
         app:layout_constraintTop_toTopOf="@+id/tVUpper" />
 
     <TextView
-        android:id="@+id/text6"
+        android:id="@+id/tvUpperDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -128,7 +128,7 @@
         android:textColor="@color/purple_500"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tvNumbers"
-        app:layout_constraintTop_toBottomOf="@+id/text6" />
+        app:layout_constraintTop_toBottomOf="@+id/tvUpperDesc" />
 
     <TextView
         android:id="@+id/tVCharCount"
@@ -186,7 +186,7 @@
         app:layout_constraintStart_toStartOf="@+id/seekBar" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivLogo"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="64dp"
@@ -201,7 +201,7 @@
         app:srcCompat="@drawable/logo" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnClipboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
