@@ -5,8 +5,11 @@ import android.content.ClipboardManager
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintSet.VISIBLE
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         val charsCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         val charsSymbols = "!#$%&*+,-.:<=>?@~" // not all special chars!
         var PasswordLength = 8
+        var tempPassword = ""
 
         seekBar?.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
@@ -28,39 +32,43 @@ class MainActivity : AppCompatActivity() {
                 progress: Int, fromUser: Boolean
             ) {
                 PasswordLength = seekBar.progress
-                textView3.setText(PasswordLength.toString())
+                tVCharCount.setText(PasswordLength.toString())
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {           }
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
         button.setOnClickListener {
 
             // check what was checked!
             var PasswordLetters = ""
-            if (chkBox_num.isChecked)
+            if (switchNumbers.isChecked)
                 PasswordLetters += numbers;
 
-            if (chkBox_small.isChecked)
+            if (switchLower.isChecked)
                 PasswordLetters += charsSmall;
 
-            if (chkBox_Capital.isChecked)
+            if (switchUpper.isChecked)
                 PasswordLetters += charsCapital;
 
             if (PasswordLetters.equals(""))
                 Toast.makeText(this@MainActivity, "Please select something! ", Toast.LENGTH_SHORT)
                     .show()
             else {
-                val tempPassword = generatePassword(PasswordLetters, PasswordLength)
-                textView.setText(tempPassword)
+                tempPassword = generatePassword(PasswordLetters, PasswordLength)
+                tVPassword.setText(tempPassword)
+                imageButton2.visibility = View.VISIBLE
 
-                // clipboard
-                var clip = ClipData.newPlainText("...", tempPassword)
-//                clipboard.setPrimaryClip(clip)
-//                Toast.makeText(this@MainActivity, "Copied: " + tempPassword, Toast.LENGTH_SHORT)
-//                    .show()
+
             }
+        }
+
+        imageButton2.setOnClickListener {
+            var clip = ClipData.newPlainText("...", tempPassword)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(this@MainActivity, "Copied: " + tempPassword, Toast.LENGTH_SHORT)
+                .show()
         }
     }
 }
