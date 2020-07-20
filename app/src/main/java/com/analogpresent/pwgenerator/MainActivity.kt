@@ -14,12 +14,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val numbers = "0123456789"
         val charsSmall = "abcdefghijklmnopqrstuvwxyz"
         val charsCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
+        val charsSymbols = "!#$%&*+,-.:<=>?@~" // not all special chars!
         var PasswordLength = 8
 
         seekBar?.setOnSeekBarChangeListener(object :
@@ -28,15 +27,12 @@ class MainActivity : AppCompatActivity() {
                 seek: SeekBar,
                 progress: Int, fromUser: Boolean
             ) {
-                PasswordLength=seekBar.progress
+                PasswordLength = seekBar.progress
                 textView3.setText(PasswordLength.toString())
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {           }
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {            }
         })
 
         button.setOnClickListener {
@@ -56,18 +52,17 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Please select something! ", Toast.LENGTH_SHORT)
                     .show()
             else {
-                val tempPassword = generatePassword(PasswordLetters,PasswordLength)
+                val tempPassword = generatePassword(PasswordLetters, PasswordLength)
                 textView.setText(tempPassword)
 
                 // clipboard
                 var clip = ClipData.newPlainText("...", tempPassword)
-                clipboard.setPrimaryClip(clip)
-                Toast.makeText(this@MainActivity, "Copied: " + tempPassword, Toast.LENGTH_SHORT)
-                    .show()
+//                clipboard.setPrimaryClip(clip)
+//                Toast.makeText(this@MainActivity, "Copied: " + tempPassword, Toast.LENGTH_SHORT)
+//                    .show()
             }
         }
     }
-
 }
 
 private fun generatePassword(passwordLetters: String, passwordLength: Int): String {
